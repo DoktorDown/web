@@ -197,13 +197,21 @@
     </div>
 
     <script>
-        let canGetDiagnosis = true;
+    let canGetDiagnosis = true;
 
-        function getMedikalAid() {
-            if (!canGetDiagnosis) {
-                document.getElementById("medikalResponse").innerText = "I just diagnosed u, now leave me alone.";
-                return;
-            }
+    function getMedikalAid() {
+        let userInput = document.getElementById("medikalInput").value.trim();
+        let responseBox = document.getElementById("medikalResponse");
+
+        if (userInput === "") {
+            responseBox.innerText = "First u have to tell me wats rong...";
+            return;
+        }
+
+        if (!canGetDiagnosis) {
+            responseBox.innerText = "I just diagnosed u, now leave me alone.";
+            return;
+        }
 
             const responses = [
     "Take 2 naps and call me never.",
@@ -336,13 +344,13 @@
 ];
 
             const randomIndex = Math.floor(Math.random() * responses.length);
-            document.getElementById("medikalResponse").innerText = responses[randomIndex];
+        responseBox.innerText = responses[randomIndex];
 
-            canGetDiagnosis = false;
-            setTimeout(() => {
-                canGetDiagnosis = true;
-            }, 10000); // 10-second cooldown
-        }
+        canGetDiagnosis = false;
+        setTimeout(() => {
+            canGetDiagnosis = true;
+        }, 10000); // 10-second cooldown
+    }
 
 document.addEventListener("DOMContentLoaded", function () {
         const audio = document.getElementById("bg-music");
