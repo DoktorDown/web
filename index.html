@@ -343,7 +343,25 @@
                 canGetDiagnosis = true;
             }, 10000); // 10-second cooldown
         }
-    </script>
 
+document.addEventListener("DOMContentLoaded", function () {
+        const audio = document.getElementById("bg-music");
+
+        // Try to play audio automatically
+        function playAudio() {
+            audio.play().catch(error => {
+                console.log("Autoplay blocked, waiting for user interaction.");
+            });
+        }
+
+        // Attempt to play audio when page loads
+        playAudio();
+
+        // Also play audio when user interacts with the page (click, scroll, keypress)
+        document.body.addEventListener("click", playAudio, { once: true });
+    });
+</script>
+
+<audio id="bg-music" src="./song.mp3"></audio>
 </body>
 </html>
