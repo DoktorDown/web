@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doktor Down</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff8a00, #e52e71);
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            border: 5px solid #ffcc00;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 28px;
+            color: #e52e71;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+        }
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .image-container img {
+            width: 80%;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            font-size: 20px;
+            color: #ff6600;
+            margin-top: 20px;
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        textarea {
+            width: 90%;
+            height: 80px;
+            border: 2px solid #ff8a00;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 16px;
+            resize: none;
+            text-align: center;
+        }
+        .button {
+            width: 90%;
+            background: linear-gradient(145deg, #ffcc00, #ff8a00);
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0px 5px 0px #cc6600;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+        .button:active {
+            box-shadow: 0px 2px 0px #cc6600;
+            transform: translateY(3px);
+        }
+        /* Diagnosis Box */
+        .diagnosis-box {
+            width: 90%;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #f0f0f0;
+            border: 2px solid #ff8a00;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .diagnosis-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e52e71;
+            margin-bottom: 5px;
+        }
+        .diagnosis-response {
+            font-size: 16px;
+            color: #0077ff;
+            font-weight: bold;
+            min-height: 24px;
+        }
+        .stats {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ff3333;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        .token-button {
+            width: 90%;
+            background: linear-gradient(145deg, #00cc99, #007755);
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0px 5px 0px #005544;
+            margin-top: 10px;
+            transition: 0.2s;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+        .token-button:active {
+            box-shadow: 0px 2px 0px #005544;
+            transform: translateY(3px);
+        }
+        .twitter-button {
+            width: 90%;
+            background: linear-gradient(145deg, #ffd700, #ff9900);
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0px 5px 0px #cc8800;
+            margin-top: 10px;
+            transition: 0.2s;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+        .twitter-button:active {
+            box-shadow: 0px 2px 0px #cc8800;
+            transform: translateY(3px);
+        }
+        footer {
+            font-size: 14px;
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Doktor Down</h1>
+
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="./doc.jpeg" alt="Doktor Down Image">
+        </div>
+
+        <!-- Get Medikal Aids Section -->
+        <h2>Get Medikal Aids</h2>
+        <div class="input-container">
+            <textarea id="medikalInput" placeholder="Tell Doktor Down wats rong..."></textarea>
+            <button class="button" onclick="getMedikalAid()">Get Diagnosed</button>
+        </div>
+
+        <!-- Diagnosis Box -->
+        <div class="diagnosis-box">
+            <div class="diagnosis-title">Diagnosis</div>
+            <div class="diagnosis-response" id="medikalResponse">Awaiting diagnosis...</div>
+        </div>
+
+        <!-- Stats Section -->
+        <p class="stats">Over 99 satisfied payshents, and 300 sent to heven.</p>
+
+        <!-- Token Button -->
+        <a href="#" class="token-button">Get your $DOWN tokens</a>
+
+        <!-- Twitter Button -->
+        <a href="#" class="twitter-button">Follow me on Tweeter</a>
+
+        <!-- Footer -->
+        <footer>Copyright Doktor Down, 2025</footer>
+    </div>
+
+    <script>
+        let canGetDiagnosis = true;
+
+        function getMedikalAid() {
+            if (!canGetDiagnosis) {
+                document.getElementById("medikalResponse").innerText = "I just diagnosed u, now leave me alone.";
+                return;
+            }
+
+            const responses = [
+    "Take 2 naps and call me never.",
+    "Rub sum garlic on it.",
+    "Drink mor watur, mayb eat a brick.",
+    "Just walk it off.",
+    "Have u tried restarting urself?",
+    "U need 2 eat more air.",
+    "Sounds like a skill issue.",
+    "Google says ur doomed.",
+    "Stop googling symptoms, ur scaring urself.",
+    "You allergic to responsibilities.",
+    "Try turning urself off and on again.",
+    "That's tuff. Maybe a band-aid?",
+    "Rub some mayonnaise on it.",
+    "It's called 'getting old.'",
+    "U got premium level stress.",
+    "Ur life bar is in the red zone.",
+    "Maybe ur just built wrong.",
+    "Too much watur, drink sum fire.",
+    "Ur symptoms suggest ur a drama queen.",
+    "I diagnose u with broke.",
+    "Maybe a nap would help. Or 17.",
+    "Try screaming into the void.",
+    "Apply a hotdog and hope for the best.",
+    "U need to reset ur brain.",
+    "Have you considered moving to Mars?",
+    "Stand up. Spin around. Sit back down. Better?",
+    "Eat a candle. It might not help but it's funny.",
+    "U need holy watur.",
+    "I prescribe a vacation. Immediately.",
+    "Lay down and pretend u don’t exist.",
+    "Breathe in. Breathe out. Still here? Unlucky.",
+    "U need a cookie and a hug.",
+    "Buy a duck. Trust me.",
+    "Might be ghosts. Call a priest or a lawyer.",
+    "U need to install an update.",
+    "Lick a tree. It’s free and weirdly healing.",
+    "Symptoms suggest u need to touch grass.",
+    "Eat some glue. (Don’t actually.)",
+    "Uninstall life and reinstall.",
+    "Walk into the ocean and think about it.",
+    "Try charging urself overnight.",
+    "Just become a millionaire. Problems solved.",
+    "Ur personality is what's sick.",
+    "Try some water. Or gasoline. (Jk, pls don't.)",
+    "Close ur eyes. Open them. Boom, still sick.",
+    "Maybe ur just hungry. Or haunted.",
+    "Eat an ice cube and see what happens.",
+    "Boredom. That’s ur sickness.",
+    "I diagnose u with 'not my problem.'",
+    "Try unplugging ur brain for 5 mins.",
+    "Find a dog and ask for guidance.",
+    "Eat soup but only with a fork.",
+    "Step 1: Ignore problem. Step 2: Problem solved.",
+    "I blame the moon.",
+    "Put some respect on ur immune system.",
+    "Buy a balloon. It fixes nothing but it's fun.",
+    "Try moving to another timezone.",
+    "U need therapy. Or a nap.",
+    "Stare at the sun. Wait, no, don’t.",
+    "Have u tried crying?",
+    "Get well soon. Or don’t. Idk, I’m not ur dad.",
+    "Consider becoming a pirate.",
+    "Drink a glass of milk and pray.",
+    "U just need more pizza.",
+    "That sounds like a u problem.",
+    "Put a Band-Aid on ur emotions.",
+    "Maybe ur too funny and the world can’t handle it.",
+    "Have u tried ignoring it until it disappears?",
+    "Rub dirt in it. Wait, that's for kids.",
+    "U need to do 5 pushups and reflect on ur choices.",
+    "U have chronic silliness.",
+    "Sell ur left shoe on eBay. It helps.",
+    "Time to switch planets.",
+    "Ur skeleton is trying to escape.",
+    "Maybe ur body is allergic to ur attitude.",
+    "U might be allergic to breathing.",
+    "Drink tea, but like, really aggressively.",
+    "I’m prescribing u a clown nose.",
+    "Stop being so mysterious. Even ur organs confused.",
+    "Ur body is tired of ur nonsense.",
+    "Eat a whole lemon. Raw. Like a champion.",
+    "Just ignore it and let future-you deal with it.",
+    "U need a vacation to the couch.",
+    "Try petting a cat. If u have no cat, become one.",
+    "U have been diagnosed with 'oops'.",
+    "U got too much swag. Try reducing it.",
+    "Eat a spaghetti noodle one at a time.",
+    "Your aura is acting suspicious.",
+    "I think ur spirit animal is a potato.",
+    "Maybe ur brain is on airplane mode.",
+    "Ur problems are 90% imagination, 10% reality.",
+    "U have too much energy. Go climb a mountain.",
+    "Drink water but aggressively.",
+    "Try wearing sunglasses inside. Might fix it.",
+    "Sleep for 3 days straight and check again.",
+    "U might be turning into a lizard.",
+    "Sounds like a quest. Go find the magical cure.",
+    "Ur left leg is in the past, ur right leg is in the future. U are the present.",
+    "U need a spiritual reboot.",
+    "Try throwing urself at the ground and missing.",
+    "Breathe, but like, professionally.",
+    "Check ur warranty. U might be expired.",
+    "Eat a raw onion. Become stronger.",
+    "Try whistling until it goes away.",
+    "I diagnose u with a dramatic personality.",
+    "Apply an ice pack to ur existence.",
+    "Your bones are arguing with each other.",
+    "Change ur password. Maybe ur body got hacked.",
+    "Find a mirror. Stare. Judge urself.",
+    "This is a side effect of being human. Sorry.",
+    "Find a wall. Lean on it dramatically.",
+    "Ur brain is buffering.",
+    "U need to delete cookies. Both computer and real.",
+    "Ur body's on low battery mode.",
+    "Go find a random object and name it Jeff.",
+    "U need to dance immediately.",
+    "Move in slow motion for the rest of the day.",
+    "U should communicate with plants more.",
+    "Your immune system took a day off.",
+    "Try learning Morse code. Might fix u.",
+    "Go outside and scream into the wind.",
+    "Do a cartwheel. Or at least think about one.",
+    "Try licking ur elbow. If u can, congrats.",
+    "Get a fish. Name it Doctor. Now u have 2 doctors.",
+    "Wear sunglasses at night. Mystery equals power.",
+    "Apply more confidence and call it medicine.",
+    "Ur skeleton is doing its best. Give it a break."
+];
+
+            const randomIndex = Math.floor(Math.random() * responses.length);
+            document.getElementById("medikalResponse").innerText = responses[randomIndex];
+
+            canGetDiagnosis = false;
+            setTimeout(() => {
+                canGetDiagnosis = true;
+            }, 10000); // 10-second cooldown
+        }
+    </script>
+
+</body>
+</html>
