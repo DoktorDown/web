@@ -6,27 +6,6 @@
     <title>Doktor Down</title>
 <link rel="icon" type="image/png" href="./favicon.png">
     <style>
-.save-button {
-    width: 90%;
-    background: linear-gradient(145deg, #ff6600, #ff3300);
-    border: none;
-    padding: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0px 5px 0px #bb2200;
-    margin-top: 10px;
-    transition: 0.2s;
-    display: inline-block;
-    text-align: center;
-}
-
-.save-button:active {
-    box-shadow: 0px 2px 0px #bb2200;
-    transform: translateY(3px);
-}
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #ff8a00, #e52e71);
@@ -203,15 +182,11 @@
             <button class="button" onclick="getMedikalAid()">Get Diagnosed</button>
         </div>
 
-<!-- Diagnosis Box -->
-<div class="diagnosis-box" id="diagnosisBox">
-    <div class="diagnosis-title">Diagnosis</div>
-    <div class="diagnosis-response" id="medikalResponse">Awaiting diagnosis...</div>
-    <p style="font-size: 12px; color: gray; margin-top: 5px;">Diagnosis by DoktorDown.com</p>
-</div>
-
-<!-- Save Button -->
-<button class="save-button" id="saveButton">Save Diagnosis</button>
+        <!-- Diagnosis Box -->
+        <div class="diagnosis-box">
+            <div class="diagnosis-title">Diagnosis</div>
+            <div class="diagnosis-response" id="medikalResponse">Awaiting diagnosis...</div>
+        </div>
 
         <!-- Stats Section -->
         <p class="stats">Over 98 satisfied payshents, and 700+ sent to heven.</p>
@@ -220,46 +195,13 @@
         <a href="#" class="token-button">Buy some $DOWN</a>
 
         <!-- Twitter Button -->
-        <a href="https://x.com/doktordown_?s=21" class="twitter-button">Follow me on 𝕏</a>
+        <a href="https://x.com/doktordown_?s=21" class="twitter-button">Follow me on X</a>
 
         <!-- Footer -->
-        <footer>Copyright Doktor Down, 2025 | I have no Telegram or socials other than 𝕏 @DoktorDown_ | CA: 12345678901234567890</footer>
+        <footer>Copyright Doktor Down, 2025 | I have no Telegram or socials other than X @DoktorDown_ | CA: 12345678901234567890</footer>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script>
-    function saveDiagnosis() {
-    const diagnosisBox = document.getElementById("diagnosisBox");
-
-    if (document.getElementById("medikalResponse").innerText === "Awaiting diagnosis...") {
-        alert("Get a diagnosis first before saving!");
-        return;
-    }
-
-    html2canvas(diagnosisBox, { scale: 2 }).then(canvas => {
-        let imageURL = canvas.toDataURL("image/png");
-
-        // Create an image element and show it on the page
-        let imgElement = document.createElement("img");
-        imgElement.src = imageURL;
-        imgElement.style = "width: 100%; margin-top: 10px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);";
-
-        // Create a container for the image
-        let resultContainer = document.getElementById("savedDiagnosisContainer");
-        resultContainer.innerHTML = ""; // Clear previous images
-        resultContainer.appendChild(imgElement);
-
-        // Create a download button
-        let downloadButton = document.createElement("a");
-        downloadButton.href = imageURL;
-        downloadButton.download = "Doktor_Down_Diagnosis.png";
-        downloadButton.innerText = "Download Diagnosis";
-        downloadButton.style = "display: block; margin-top: 10px; padding: 10px; background: #ff8a00; color: white; font-weight: bold; border-radius: 5px; text-align: center; text-decoration: none;";
-        
-        resultContainer.appendChild(downloadButton);
-    });
-}
-
+    <script>
     let canGetDiagnosis = true;
 
     function getMedikalAid() {
