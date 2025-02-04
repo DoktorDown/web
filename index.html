@@ -239,9 +239,24 @@
     html2canvas(diagnosisBox, { scale: 2 }).then(canvas => {
         let imageURL = canvas.toDataURL("image/png");
 
-        // Open the image in a new tab
-        let newTab = window.open();
-        newTab.document.write('<img src="' + imageURL + '" style="width: 100%;">');
+        // Create an image element and show it on the page
+        let imgElement = document.createElement("img");
+        imgElement.src = imageURL;
+        imgElement.style = "width: 100%; margin-top: 10px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);";
+
+        // Create a container for the image
+        let resultContainer = document.getElementById("savedDiagnosisContainer");
+        resultContainer.innerHTML = ""; // Clear previous images
+        resultContainer.appendChild(imgElement);
+
+        // Create a download button
+        let downloadButton = document.createElement("a");
+        downloadButton.href = imageURL;
+        downloadButton.download = "Doktor_Down_Diagnosis.png";
+        downloadButton.innerText = "Download Diagnosis";
+        downloadButton.style = "display: block; margin-top: 10px; padding: 10px; background: #ff8a00; color: white; font-weight: bold; border-radius: 5px; text-align: center; text-decoration: none;";
+        
+        resultContainer.appendChild(downloadButton);
     });
 }
 
